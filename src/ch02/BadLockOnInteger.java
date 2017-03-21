@@ -1,3 +1,5 @@
+package ch02;
+
 /**
  * Created by xuan on 17-3-21.
  */
