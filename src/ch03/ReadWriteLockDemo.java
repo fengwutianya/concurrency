@@ -37,7 +37,7 @@ public class ReadWriteLockDemo {
     }
 
     public static void main(String[] args) {
-        ReadWriteLockDemo demo = new ReadWriteLockDemo();
+        final ReadWriteLockDemo demo = new ReadWriteLockDemo();
         Runnable readRunnable = new Runnable() {
             @Override
             public void run() {
