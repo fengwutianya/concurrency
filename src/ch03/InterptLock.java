@@ -15,34 +15,25 @@ public class InterptLock implements Runnable {
     }
     @Override
     public void run() {
-        if (i == 1) {
-            try {
+        try {
+            if (i == 1) {
                 lock1.lockInterruptibly();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            } finally {
-                lock1.unlock();
-            }
-            try {
+                Thread.sleep(200);
                 lock2.lockInterruptibly();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("thread1 done");
             }
-            System.out.println("thread1 done");
-        }
-        if (i == 2) {
-            try {
+            if (i == 2) {
                 lock2.lockInterruptibly();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }finally {
-                lock2.unlock();
-            }
-            try {
+                Thread.sleep(200);
                 lock1.lockInterruptibly();
-            } catch (InterruptedException e) {
-                e.printStackTrace();
+                System.out.println("thread2 done");
             }
+        } catch (InterruptedException e){
+            e.printStackTrace();
+        } finally {
+            System.out.println(Thread.currentThread().getName() + " release lock");
+            if (lock1.isHeldByCurrentThread()) lock1.unlock();
+            if (lock2.isHeldByCurrentThread()) lock2.unlock();
         }
     }
 
